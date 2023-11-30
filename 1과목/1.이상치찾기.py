@@ -11,3 +11,4 @@ ceil = np.ceil(out['age']).mean()
 floor = np.floor(out['age']).mean()
 trunc = np.trunc(out['age']).mean()
 print(ceil+floor+trunc)
+ㅇㅇ
