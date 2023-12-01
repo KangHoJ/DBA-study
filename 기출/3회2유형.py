@@ -17,7 +17,7 @@ print('초기load shape : ',train.shape , test.shape)
 # 결측값 확인
 # print(train.isnull().sum()) 
 train['AnnualIncome'] = train['AnnualIncome'].fillna(train['AnnualIncome'].median())
-test['AnnualIncome'] = test['AnnualIncome'].fillna(test['AnnualIncome'].median())
+test['AnnualIncome'] = test['AnnualIncome'].fillna(train['AnnualIncome'].median())
 # print(train.isnull().sum()) 
 
 # 유형별로 나누기 

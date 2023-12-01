@@ -4,7 +4,7 @@ import numpy as np
 df = pd.read_csv('basic2.csv')
 
 df['Date'] = pd.to_datetime(df['Date'])
-df['week'] = df['Date'].dt.dayofweek
+df['week'] = df['Date'].dt.dayofweek # 0~6까지 무슨 요일인지
 a = df[(df['week']>=5) & (df['Date'].dt.year==2022) & (df['Date'].dt.month==5)]['Sales'].mean() # 주말
 b = df[(df['week']<5) & (df['Date'].dt.year==2022) & (df['Date'].dt.month==5)]['Sales'].mean() # 평일
 print(round(a-b,2))

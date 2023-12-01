@@ -43,9 +43,9 @@ X_test['education_level'] = X_test['education_level'].fillna('etc')
 train['enrolled_university'] = train['enrolled_university'].fillna('etc')
 X_test['enrolled_university'] = X_test['enrolled_university'].fillna('etc')
 train['experience'] = train['experience'].fillna(train['experience'].mode()[0])
-X_test['experience'] = X_test['experience'].fillna(X_test['experience'].mode()[0])
+X_test['experience'] = X_test['experience'].fillna(train['experience'].mode()[0])
 train['last_new_job'] = train['last_new_job'].fillna(train['last_new_job'].mode()[0])
-X_test['last_new_job'] = X_test['last_new_job'].fillna(X_test['last_new_job'].mode()[0])
+X_test['last_new_job'] = X_test['last_new_job'].fillna(train['last_new_job'].mode()[0])
 # print(train.isnull().sum())
 print('결측값 채우기 후 ' , train.shape,X_test.shape)
 print(train.isnull().sum(),X_test.isnull().sum())
@@ -67,6 +67,7 @@ X_train = train.drop('target',axis=1)
 Y_train = train['target']
 X_test = X_test
 print('분리 후 :', X_train.shape,X_test.shape,Y_train.shape)
+
 
 # #인코딩
 # X_train = pd.get_dummies(X_train)
@@ -99,14 +100,18 @@ print(x_tr.shape , x_val.shape , y_tr.shape , y_val.shape)
 
 
 model = XGBClassifier(random_state=2023,max_depth=5,n_estimators=100)
-model.fit(x_tr,y_tr)
-t_pred= model.predict_proba(x_val)
-print(t_pred[:,0])
-score = roc_auc_score(y_val,t_pred[:,1])
-print(score)
+model.fit(X_train,Y_train)
+tr_pred = model.predict_proba(X_train)
+te_pred= model.predict_proba(x_val)
+score = roc_auc_score(Y_train,tr_pred[:,1])
+score2 = roc_auc_score(y_val,te_pred[:,1])
+print(score , score2)
 
-# pred = model.predict_proba(X_test)
-
+predi = model.predict_proba(X_test)
+pred = predi[:,1]
+# pd.DataFrame({'id': X_test.enrollee_id, 'target': pred}).to_csv('003000000.csv', index=False)
+df = pd.DataFrame({'enrollee_id': X_test['enrollee_id'],'target':pred})
+print(df)
 
 # import pickle
 # with open("./answer.pickle", "rb") as file:
@@ -114,3 +119,6 @@ print(score)
 #     ans = pd.DataFrame(ans)
 # print(ans)
 # print(roc_auc_score(ans['target'], pred))
+
+# 컬럼이름 바꾸고 싶을때 
+# df.rename()
