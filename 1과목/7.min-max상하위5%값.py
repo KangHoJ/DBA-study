@@ -10,7 +10,7 @@ from sklearn.preprocessing import MinMaxScaler
 # from sklearn.preprocessing import 
 sc = MinMaxScaler()
 df['f5'] = sc.fit_transform(df[['f5']])
-upper = df['f5'].quantile(0.95)
+upper = df['f5'].quantile(0.95) # 상위5%
 lower = df['f5'].quantile(0.05)
 print(upper+lower)
 # print(sklearn.preprocessing.__all__)

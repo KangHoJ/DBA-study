@@ -101,6 +101,7 @@ print(x_tr.shape , x_val.shape , y_tr.shape , y_val.shape)
 model = XGBClassifier(random_state=2023,max_depth=5,n_estimators=100)
 model.fit(x_tr,y_tr)
 t_pred= model.predict_proba(x_val)
+print(t_pred[:,0])
 score = roc_auc_score(y_val,t_pred[:,1])
 print(score)
 

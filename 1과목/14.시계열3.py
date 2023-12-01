@@ -16,6 +16,7 @@ def event_sales(x):
 df = df.apply(lambda x : event_sales(x) , axis=1)
 # print(df)
 
+
 df['Date'] = pd.to_datetime(df['Date'])
 df['month'] = df['Date'].dt.month
 df_2022 = df[df['Date'].dt.year == 2022]
@@ -24,3 +25,4 @@ df_2023 = df[df['Date'].dt.year == 2023]
 a = df_2022.groupby('month')['Sales'].sum().max()
 b = df_2023.groupby('month')['Sales'].sum().max()
 print(round(abs(a-b),2))
+

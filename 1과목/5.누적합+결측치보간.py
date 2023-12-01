@@ -10,3 +10,5 @@ df = pd.read_csv('basic1.csv')
 df = df[df['f2']==1]['f1'].cumsum()
 df = df.fillna(method='bfill')
 print(df)
+
+# 누적합, 누적곱 ,누적 최대값 ,누적 최소값  -> .cumsum , .cumprod , .cummax , .cummin

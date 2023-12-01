@@ -5,7 +5,7 @@ import numpy as np
 df = pd.read_csv('basic1.csv')
 
 
-df['range'] = pd.qcut(df['age'],q=3,labels = ['group1','group2','group3'])
+df['range'] = pd.qcut(df['age'],q=3,labels = ['group1','group2','group3']) #3등분후 변수생성
 group1 = df[df['range']=='group1']['age'].median()
 group2 = df[df['range']=='group2']['age'].median()
 group3 = df[df['range']=='group3']['age'].median()

@@ -242,7 +242,14 @@ time = pd.date_range('2023-09-24 12:25:00','2023-09-25 14:45:30', periods= 7)
 df['time']=time
 df = df[['time','물품','판매수','개당수익']]
 
+df['time'] = pd.to_datetime(df['time'])
 print('문제25',df[df['time'].between('2023-09-24 16:00:00','2023-09-24 22:00:00')]['판매수'].sum())
+
+df['date'] = df['time'].dt.strftime('%Y-%m') # 원하는 형식으로 만들고 싶을때 strftime 
+
+
+print(dir(pd.to_datetime))
+
 
 # #	문제26 o
 # #	9월	25일	00:00~12:00	까지의	B물품의 매출액 총합을 구하시오.
