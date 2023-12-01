@@ -135,3 +135,31 @@ k=19
 # 1-p(x<k)계산
 prob2 = 1-stats.binom.cdf(k-1,n,p)
 print(round(prob2,3))
+
+
+import pandas as pd
+df = pd.read_csv('https://raw.githubusercontent.com/Datamanim/datarepo/main/bank/train.csv')
+
+# 가장 많은 광고를 집행했던 날짜는 언제인가? (데이터 그대로 일(숫자),달(영문)으로 표기) 
+print(df.groupby('month')['campaign'].sum().idxmax())
+df = df[df['month']=='may']
+print(df.groupby('day')['campaign'].sum().idxmax())
+
+# 데이터의 job이 unknown 상태인 고객들의 age 컬럼 값의 정규성을 검정하고자 한다. 
+# 샤피로 검정의 p-value값을 구하여라
+from scipy import stats
+df = pd.read_csv('https://raw.githubusercontent.com/Datamanim/datarepo/main/bank/train.csv')
+df = df[df['job']=='unknown']
+t , p = stats.shapiro(df['age'])
+print(p)
+
+## age와 balance의 상관계수를 구하여라
+df = pd.read_csv('https://raw.githubusercontent.com/Datamanim/datarepo/main/bank/train.csv')
+print(df[['age','balance']].corr())
+
+# y 변수와 education 변수는 독립인지 카이제곱검정을 통해 확인하려한다. p-value값을 출력하라
+df = pd.read_csv('https://raw.githubusercontent.com/Datamanim/datarepo/main/bank/train.csv')
+table = pd.crosstab(df['y'],df['education'])
+s , p , ddof , exp = stats.chi2_contingency(table)
+print(p)
+

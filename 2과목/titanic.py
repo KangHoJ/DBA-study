@@ -61,7 +61,7 @@ X_tr , X_val , y_tr , y_val = train_test_split(X.values,Y.values,test_size=0.3,s
 print(X_tr.shape, X_val.shape , y_tr.shape , y_val.shape)
 
 # model = LGBMClassifier()
-model = RandomForestClassifier()
+model = RandomForestClassifier(random_state=25)
 model.fit(X_tr,y_tr)
 pred = model.predict(X_val)
 print('스코어',accuracy_score(pred,y_val))

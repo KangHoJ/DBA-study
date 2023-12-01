@@ -89,18 +89,19 @@ x_tr , x_val , y_tr , y_val = train_test_split(X_train,y_train['Reached.on.Time_
 print('분리후',x_tr.shape , x_val.shape , y_tr.shape , y_val.shape)
 
 # roc_auc_score 평가
-model = RandomForestClassifier(random_state=2023,n_estimators=75,max_depth=3)
+model = RandomForestClassifier()
 model2 = LGBMClassifier()
 model3 = XGBClassifier()
 
-model.fit(x_tr,y_tr)
+model.fit(X_train,y_train)
 pred = model.predict_proba(x_val)
 # print(pred[:,1])
-score = roc_auc_score(y_val,pred[:,1])
-print(score)
+print(pred)
+# score = roc_auc_score(y_val,pred[:,1])
+# print(score)
 
-result = model.predict_proba(X_test)
-# print(len(result))
-# print(len(X_test_id))
-df = pd.DataFrame({'id':X_test_id , 'Reached.on.Time_Y.N':result[:,1]})
-df.to_csv('2_submission.csv',index=False)
+# result = model.predict_proba(X_test)
+# # print(len(result))
+# # print(len(X_test_id))
+# df = pd.DataFrame({'id':X_test_id , 'Reached.on.Time_Y.N':result[:,1]})
+# df.to_csv('2_submission.csv',index=False)

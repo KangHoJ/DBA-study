@@ -24,6 +24,7 @@ from scipy import stats
 result = stats.pearsonr(df['Cholesterol'],df['weight'])
 print(result)
 
+# age가 55 , Cholesterol 72.6 일때 예측 
 age = 55
 Cholesterol = 72.6
 modelx = 74.8953 + (-0.0361*55) + (0.0819*72.6)
